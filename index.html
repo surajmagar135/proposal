@@ -13,15 +13,15 @@ body{
     overflow:hidden;
     display:flex;
     justify-content:center;
-    align-items:flex-end; /* card at bottom */
-    padding-bottom:30px;
+    align-items:flex-start; /* card slightly above bottom */
+    padding-top:50px;
     font-family:Arial, sans-serif;
     user-select:none;
 
-    /* Background image centered & scaled */
+    /* Background full cover */
     background-image: url('https://raw.githubusercontent.com/surajmagar135/proposal/main/New%20folder/ram.jpg');
-    background-size: 60% auto;      /* slightly smaller than full width */
-    background-position: center center;    /* center middle */
+    background-size: cover;          /* full cover */
+    background-position: center;     /* center image */
     background-repeat: no-repeat;
 }
 
@@ -38,19 +38,20 @@ body{
     to{ transform:translateY(-110vh); }
 }
 
-/* ===== Card (bottom box) ===== */
+/* ===== Card (middle box) ===== */
 .card{
-    background: rgba(255,255,255,0.2); /* very transparent */
-    backdrop-filter: blur(18px);       /* strong blur */
-    padding:12px 10px;
-    border-radius:15px;
+    background: rgba(255,255,255,0.25); /* slightly more visible */
+    backdrop-filter: blur(18px);
+    padding:15px 12px;
+    border-radius:18px;
     text-align:center;
     position:relative;
-    width:100%;
-    max-width:240px;
-    height:180px;
+    width:90%;
+    max-width:280px;
+    height:auto;
     overflow:hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    margin-top:40px; /* move a bit down from top */
 }
 
 /* ===== Card content spacing ===== */
@@ -103,6 +104,17 @@ button{
 
 #smirk{position:absolute;font-size:18px;display:none;}
 #kiss{position:absolute;top:6px;right:6px;font-size:20px;display:none;}
+
+/* ===== Responsive adjustments ===== */
+@media(max-width:480px){
+    .card{
+        max-width:90%;
+        padding:12px 10px;
+    }
+    #yes{top:90px; left:10px;}
+    #no{top:90px; left:140px;}
+    .card h2{ font-size:14px; }
+}
 </style>
 </head>
 
@@ -140,7 +152,7 @@ const sadClickSound = new Howl({
 
 // ===== Love music (plays only on YES click) =====
 const loveMusic = new Howl({
-    src: ['https://raw.githubusercontent.com/surajmagar135/unique/main/love.mp3'],  // raw GitHub URL
+    src: ['https://raw.githubusercontent.com/surajmagar135/unique/main/love.mp3'],
     volume:0.7
 });
 
@@ -160,7 +172,7 @@ yesBtn.onclick=()=>{
     yesBtn.style.transform="scale(1.2)";
     setTimeout(()=>yesBtn.style.transform="scale(1)",200);
     happySound.play();
-    loveMusic.play(); // play love.mp3
+    loveMusic.play();
     document.getElementById("hurray").style.display="block";
     document.getElementById("final-msg").style.display="block";
     noBtn.style.display="none";
