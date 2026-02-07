@@ -156,17 +156,22 @@ const kiss=document.getElementById("kiss");
 function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
 
 // ===== YES click =====
-yesBtn.onclick=()=>{
+yesBtn.onclick = () => {
     vibrate(120);
-    yesBtn.style.transform="scale(1.2)";
-    setTimeout(()=>yesBtn.style.transform="scale(1)",200);
+    yesBtn.style.transform = "scale(1.2)";
+    setTimeout(() => yesBtn.style.transform = "scale(1)", 200);
     happySound.play();
-    loveMusic.play();
-    document.getElementById("hurray").style.display="block";
-    document.getElementById("final-msg").style.display="block";
-    noBtn.style.display="none";
-    smirk.style.display="none";
-    kiss.style.display="block";
+
+    // Play love music only if not already playing
+    if (!loveMusic.playing()) {
+        loveMusic.play();
+    }
+
+    document.getElementById("hurray").style.display = "block";
+    document.getElementById("final-msg").style.display = "block";
+    noBtn.style.display = "none";
+    smirk.style.display = "none";
+    kiss.style.display = "block";
 };
 
 // ===== NO button movement =====
