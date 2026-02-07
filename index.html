@@ -116,7 +116,7 @@ button{
     <button id="no">No</button>
 
     <span id="smirk">😢</span>
-    <span id="kiss">❤️</span>
+    <span id="kiss">😘</span>
 
     <div id="hurray">🎉 HURRAY!!! 🎉</div>
     <div id="final-msg">I knew it 😘</div>
@@ -139,11 +139,14 @@ const sadClickSound = new Howl({
   volume:0.5
 });
 
-// ===== Love music (plays only on YES click) =====
+// ===== Love music =====
 const loveMusic = new Howl({
     src: ['https://raw.githubusercontent.com/surajmagar135/unique/main/love.mp3'],
-    volume:0.7
+    volume:0.7,
+    onend: () => { isPlaying = false; } // reset flag when done
 });
+
+let isPlaying = false; // track if love music is playing
 
 // ===== Elements =====
 const yesBtn=document.getElementById("yes");
@@ -163,8 +166,9 @@ yesBtn.onclick = () => {
     happySound.play();
 
     // Play love music only if not already playing
-    if (!loveMusic.playing()) {
+    if (!isPlaying) {
         loveMusic.play();
+        isPlaying = true;
     }
 
     document.getElementById("hurray").style.display = "block";
