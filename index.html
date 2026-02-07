@@ -14,15 +14,16 @@ body{
     display:flex;
     justify-content:center;
     align-items:flex-end; /* card at bottom */
-    padding-bottom:50px;
+    padding-bottom:80px;   /* slightly lower */
     font-family:Arial, sans-serif;
     user-select:none;
 
-    /* Background image centered & scaled */
+    /* Background image full screen, maintain aspect ratio */
     background-image: url('https://raw.githubusercontent.com/surajmagar135/proposal/main/New%20folder/ram.jpg');
-    background-size: 50% auto;      /* slightly smaller than full width */
-    background-position: center center;    /* center middle */
+    background-size: contain;      /* fit whole image */
+    background-position: center center;
     background-repeat: no-repeat;
+    background-color: #000;        /* optional fallback */
 }
 
 /* ===== Hearts floating ===== */
@@ -40,22 +41,22 @@ body{
 
 /* ===== Card (bottom box) ===== */
 .card{
-    background: rgba(255,255,255,0.2); /* very transparent */
-    backdrop-filter: blur(18px);       /* strong blur */
+    background: rgba(255,255,255,0.1); /* very transparent */
+    backdrop-filter: blur(12px);
     padding:12px 10px;
     border-radius:15px;
     text-align:center;
     position:relative;
     width:70%;
     max-width:240px;
-    height:180px;
+    height:auto;
     overflow:hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: none; /* remove shadow */
 }
 
 /* ===== Card content spacing ===== */
 .card h2{
-    margin:10px 0 25px 0;
+    margin:10px 0 20px 0;
     font-size:16px;
 }
 
@@ -75,7 +76,7 @@ button{
     animation:pulse 1.5s infinite;
     position:absolute;
     left:15px;
-    top:110px;
+    top:90px;  /* moved slightly down */
 }
 
 @keyframes pulse{
@@ -89,7 +90,7 @@ button{
     color:white;
     position:absolute;
     left:130px;
-    top:110px;
+    top:90px;  /* aligned with yes */
 }
 
 /* ===== Messages ===== */
@@ -140,7 +141,7 @@ const sadClickSound = new Howl({
 
 // ===== Love music (plays only on YES click) =====
 const loveMusic = new Howl({
-    src: ['https://raw.githubusercontent.com/surajmagar135/unique/main/love.mp3'],  // raw GitHub URL
+    src: ['https://raw.githubusercontent.com/surajmagar135/unique/main/love.mp3'],
     volume:0.7
 });
 
@@ -160,7 +161,7 @@ yesBtn.onclick=()=>{
     yesBtn.style.transform="scale(1.2)";
     setTimeout(()=>yesBtn.style.transform="scale(1)",200);
     happySound.play();
-    loveMusic.play(); // play love.mp3
+    loveMusic.play();
     document.getElementById("hurray").style.display="block";
     document.getElementById("final-msg").style.display="block";
     noBtn.style.display="none";
